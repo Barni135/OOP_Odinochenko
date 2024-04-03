@@ -4,20 +4,32 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Src.ex4.TextTableRepresentation;
+
 /**
  * Конкретна реалізація ResultFactory для CalculationResult.
  */
 public class CalculationResultFactory implements ResultFactory {
     /**
-     * Створює об'єкт BasicCalculationResult з вказаною масою та швидкістю.
+     * Конструктор з параметром, що встановлює тип представлення результатів обчислень.
+     *
+     * @param textTableRepresentation об'єкт, що реалізує представлення результатів у вигляді текстової таблиці
+     */
+    public CalculationResultFactory(TextTableRepresentation textTableRepresentation) {
+    }
+
+    // Реалізація методів create, saveResultsToFile та loadResultsFromFile
+
+    /**
+     * Створює об'єкт результату обчислень з вказаною масою та швидкістю.
      *
      * @param mass     маса об'єкта
      * @param velocity швидкість об'єкта
-     * @return об'єкт BasicCalculationResult
+     * @return об'єкт результату обчислень
      */
     @Override
     public CalculationResult create(double mass, double velocity) {
-        return new BasicCalculationResult(velocity, velocity);
+        return new BasicCalculationResult(mass, velocity);
     }
 
     /**
@@ -55,5 +67,15 @@ public class CalculationResultFactory implements ResultFactory {
             e.printStackTrace();
         }
         return loadedResults;
+    }
+
+    /**
+     * Повертає текстове представлення результатів обчислень у вигляді таблиці.
+     *
+     * @param results список результатів обчислень
+     * @return текстове представлення у вигляді таблиці
+     */
+    public String getResultsAsTextTable(List<CalculationResult> results) {
+        return TextTableRepresentation.getAsTextTable(results);
     }
 }

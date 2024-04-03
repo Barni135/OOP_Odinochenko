@@ -1,50 +1,25 @@
 package Src.ex2_3;
 
 /**
- * Конкретна реалізація CalculationResult, що представляє певний тип результату.
+ * Підклас класу CalculationResult, що представляє базовий результат обчислень.
  */
 public class BasicCalculationResult extends CalculationResult {
-    private double mass;
-    private double velocity; // Додайте поле для збереження швидкості
 
     /**
-     * Конструктор для створення об'єкта BasicCalculationResult з вказаною масою та швидкістю.
+     * Конструктор з параметрами.
      *
      * @param mass     маса об'єкта
      * @param velocity швидкість об'єкта
      */
     public BasicCalculationResult(double mass, double velocity) {
         super(mass, velocity);
-        this.mass = mass;
-        this.velocity = velocity; // Ініціалізуйте поле швидкості
     }
 
-    /**
-     * Отримує масу об'єкта.
-     *
-     * @return маса об'єкта
-     */
-    public double getMass() {
-        return mass;
-    }
-
-    /**
-     * Отримує швидкість об'єкта.
-     *
-     * @return швидкість об'єкта
-     */
-    public double getVelocity() {
-        return velocity;
-    }
-
-    /**
-     * Відображає результат обчислень у текстовому вигляді.
-     */
     @Override
     public void displayResult() {
-        System.out.println("Базовий результат обчислень:");
-        System.out.println("Маса: " + mass);
-        System.out.println("Швидкість: " + velocity);
-        System.out.println("Кінетична енергія: " + kineticEnergy);
+        // TODO: Implement displayResult method
+        System.out.println("Mass: " + mass);
+        System.out.println("Velocity: " + velocity);
+        System.out.println("Kinetic Energy: " + kineticEnergy);
     }
 }

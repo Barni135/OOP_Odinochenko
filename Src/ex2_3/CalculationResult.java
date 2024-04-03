@@ -1,26 +1,15 @@
 package Src.ex2_3;
 
-import java.io.Serializable;
-
 /**
  * Абстрактний клас, що представляє результат обчислень.
  */
-public abstract class CalculationResult implements Serializable {
+public abstract class CalculationResult {
     protected double mass;
     protected double velocity;
     protected double kineticEnergy;
 
     /**
-     * Конструктор без параметрів.
-     */
-    public CalculationResult() {
-        this.mass = 0.0;
-        this.velocity = 0.0;
-        this.kineticEnergy = 0.0;
-    }
-
-    /**
-     * Конструктор для створення об'єкта CalculationResult з вказаною масою та швидкістю.
+     * Конструктор з параметрами.
      *
      * @param mass     маса об'єкта
      * @param velocity швидкість об'єкта
@@ -32,7 +21,31 @@ public abstract class CalculationResult implements Serializable {
     }
 
     /**
-     * Метод для відображення результату обчислень.
+     * Повертає масу об'єкта.
+     *
+     * @return маса об'єкта
      */
+    public double getMass() {
+        return mass;
+    }
+
+    /**
+     * Повертає швидкість об'єкта.
+     *
+     * @return швидкість об'єкта
+     */
+    public double getVelocity() {
+        return velocity;
+    }
+
+    /**
+     * Повертає кінетичну енергію об'єкта.
+     *
+     * @return кінетична енергія об'єкта
+     */
+    public double getKineticEnergy() {
+        return kineticEnergy;
+    }
+
     public abstract void displayResult();
 }

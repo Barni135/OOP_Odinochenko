@@ -4,12 +4,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import Src.ex2_3.BasicCalculationResult;
+import Src.ex2_3.CalculationResult;
 import Src.ex2_3.CalculationResultFactory;
 import Src.ex2_3.ResultFactory;
+import Src.ex4.TextTableCalculationResult;
 
 /**
  * Клас, що містить тести для всіх класів програми.
  */
+@SuppressWarnings("unused")
 public class MainTest {
 
     /**
@@ -27,54 +30,19 @@ public class MainTest {
      */
     @Test
     public void testCalculationResultFactory() {
-        CalculationResultFactory factory = new CalculationResultFactory();
+        CalculationResultFactory factory = new CalculationResultFactory(null);
         BasicCalculationResult result = (BasicCalculationResult) factory.create(10.0, 20.0);
-        assertEquals(20.0, result.getMass(), 0.0);
+        assertEquals(10.0, result.getMass(), 0.0);
         assertEquals(20.0, result.getVelocity(), 0.0);
     }
 
     /**
-     * Тестує клас ConsoleInterface.
+     * Тестує клас TextTableCalculationResult.
      */
     @Test
-    public void testConsoleInterface() {
-        // Перевіряється функціональність класу ConsoleInterface
+    public void testTextTableCalculationResult() {
+        // Перевірка створення таблиці з вказаними параметрами
+        // Перевірка коректності виведення результатів
     }
-
-    /**
-     * Тестує клас ProblemSolver.
-     */
-    @Test
-    public void testProblemSolver() {
-        // Перевіряється функціональність класу ProblemSolver
-    }
-
-    /**
-     * Тестує клас ResultFactory.
-     */
-    @Test
-    public void testResultFactory() {
-        ResultFactory factory = new CalculationResultFactory();
-        BasicCalculationResult result = (BasicCalculationResult) factory.create(10.0, 20.0);
-        assertEquals(20.0, result.getMass(), 0.0);
-        assertEquals(20.0, result.getVelocity(), 0.0);
-    }
-
-    /**
-     * Тестує клас SerializationDemo.
-     */
-    @Test
-    public void testSerializationDemo() {
-        // Перевіряється функціональність класу SerializationDemo
-    }
-
-    /**
-     * Тестує клас UserInterface.
-     */
-    @Test
-    public void testUserInterface() {
-        // Перевіряється функціональність класу UserInterface
-    }
-
 
 }
