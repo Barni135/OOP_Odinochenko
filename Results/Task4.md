@@ -384,4 +384,4 @@ public class TextTableCalculationResult {
  ```
  ![Results](/workspaces/OOP_Odinochenko/Image/image-5.png)
 
- ![Results]/workspaces/OOP_Odinochenko/Image/image-6.png)
+ ![Results](/workspaces/OOP_Odinochenko/Image/image-6.png)
