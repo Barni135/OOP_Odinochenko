@@ -385,3 +385,5 @@ public class TextTableCalculationResult {
  ![Results](.../Image/image-5.png)
 
  ![Results](.../Image/image-6.png)
+
+ ![Result](../Image/image-1.png)
