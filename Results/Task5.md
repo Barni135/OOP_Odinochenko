@@ -1,4 +1,8 @@
-package Src.ex2_3.test;
+ Завдання 5
+
+Test.java
+
+ ```package Src.ex2_3.test;
 
 import Src.ex2_3.BasicCalculationResult;
 import Src.ex2_3.CalculationResult;
@@ -212,4 +216,227 @@ public class Test {
         String table = TextTableCalculationResult.getAsTextTable(resultList);
         System.out.println(table);
     }
+} 
+```
+Comand.java
+
+```package Src.ex5;
+
+/**
+ * Інтерфейс команди, яка визначає методи для виконання та скасування команди.
+ */
+public interface Command {
+    /**
+     * Виконує команду.
+     */
+    void execute();
+
+    /**
+     * Скасовує виконану команду.
+     */
+    void undo();
 }
+
+ ```
+
+ MacroComand.java
+
+ ```package Src.ex5;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Клас, який представляє макрокоманду, що складається з декількох окремих команд.
+ */
+public class MacroCommand implements Command {
+    private List<Command> commands;
+
+    /**
+     * Конструктор класу MacroCommand.
+     */
+    public MacroCommand() {
+        this.commands = new ArrayList<>();
+    }
+
+    /**
+     * Додає команду до макрокоманди.
+     * @param command Додавана команда.
+     */
+    public void addCommand(Command command) {
+        commands.add(command);
+    }
+
+    /**
+     * Видаляє команду з макрокоманди.
+     * @param command Видаляєма команда.
+     */
+    public void removeCommand(Command command) {
+        commands.remove(command);
+    }
+
+    /**
+     * Виконує всі команди макрокоманди.
+     */
+    @Override
+    public void execute() {
+        for (Command command : commands) {
+            command.execute();
+        }
+    }
+
+    /**
+     * Скасовує виконані команди макрокоманди в зворотньому порядку.
+     */
+    @Override
+    public void undo() {
+        // Виконуємо скасування команд у зворотньому порядку
+        for (int i = commands.size() - 1; i >= 0; i--) {
+            commands.get(i).undo();
+        }
+    }
+}
+ ```
+ 
+ Menu.java
+
+ ```package Src.ex5;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import Src.ex2_3.CalculationResult;
+
+/**
+ * Клас, який представляє меню програми.
+ */
+public class Menu {
+    private List<CalculationResult> resultList;
+    private Map<String, Command> commands;
+
+    /**
+     * Конструктор класу Menu.
+     */
+    public Menu() {
+        this.resultList = new ArrayList<>();
+        this.commands = new HashMap<>();
+    }
+
+    /**
+     * Додає результат обчислення до списку результатів у меню.
+     * @param result Результат обчислення.
+     */
+    public void addResult(CalculationResult result) {
+        resultList.add(result);
+    }
+
+    /**
+     * Повертає список результатів обчислення.
+     * @return Список результатів обчислення.
+     */
+    public List<CalculationResult> getResults() {
+        return resultList;
+    }
+
+    /**
+     * Видаляє результат обчислення з меню за заданим ім'ям файлу.
+     * @param fileName Ім'я файлу з результатом обчислення.
+     */
+    public void deleteResult(String fileName) {
+        CalculationResult resultToRemove = null;
+        for (CalculationResult result : resultList) {
+            if (result.getFileName().equals(fileName)) {
+                resultToRemove = result;
+                break;
+            }
+        }
+        if (resultToRemove != null) {
+            resultList.remove(resultToRemove);
+            System.out.println("Результат " + fileName + " успішно видалено з меню.");
+        } else {
+            System.out.println("Не вдалося знайти результат " + fileName + " для видалення.");
+        }
+    }
+
+    /**
+     * Додає команду до меню за заданим ім'ям.
+     * @param commandName Ім'я команди.
+     * @param command Об'єкт команди.
+     */
+    public void setCommand(String commandName, Command command) {
+        commands.put(commandName, command);
+    }
+
+    /**
+     * Повертає команду за заданим ім'ям.
+     * @param commandName Ім'я команди.
+     * @return Об'єкт команди або null, якщо команда не знайдена.
+     */
+    public Command getCommand(String commandName) {
+        return commands.get(commandName);
+    }
+}
+ ```
+
+ ScaleCommand.java
+
+ ```package Src.ex5;
+
+import Src.ex2_3.CalculationResult;
+
+/**
+ * Клас, який представляє команду масштабування результату обчислення.
+ */
+public class ScaleCommand implements Command {
+    private CalculationResult result;
+    private double scaleFactor;
+    private double inverseScaleFactor;
+
+    /**
+     * Конструктор класу ScaleCommand.
+     * @param result Результат обчислення, який буде масштабований.
+     * @param scaleFactor Коефіцієнт масштабування.
+     */
+    public ScaleCommand(CalculationResult result, double scaleFactor) {
+        this.result = result;
+        this.scaleFactor = scaleFactor;
+        this.inverseScaleFactor = 1.0 / scaleFactor;
+    }
+
+    /**
+     * Статичний метод для створення єдиного екземпляру класу.
+     * @param result Результат обчислення, який буде масштабований.
+     * @param scaleFactor Коефіцієнт масштабування.
+     * @return Об'єкт класу ScaleCommand.
+     */
+    public static ScaleCommand createInstance(CalculationResult result, double scaleFactor) {
+        return new ScaleCommand(result, scaleFactor);
+    }
+
+    /**
+     * Виконує масштабування результату обчислення.
+     */
+    @Override
+    public void execute() {
+        // Виконати масштабування
+        result.setMass(result.getMass() * scaleFactor);
+        result.setVelocity(result.getVelocity() * scaleFactor);
+        result.setKineticEnergy(result.getKineticEnergy() * scaleFactor);
+    }
+
+    /**
+     * Скасовує масштабування результату обчислення.
+     */
+    @Override
+    public void undo() {
+        // Скасувати масштабування
+        result.setMass(result.getMass() * inverseScaleFactor);
+        result.setVelocity(result.getVelocity() * inverseScaleFactor);
+        result.setKineticEnergy(result.getKineticEnergy() * inverseScaleFactor);
+    }
+}
+ ```
+ ![Results](../Image/image-7.png)
+ ![alt text](../Image/image-8.png.png)

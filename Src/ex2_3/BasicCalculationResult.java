@@ -22,4 +22,16 @@ public class BasicCalculationResult extends CalculationResult {
         System.out.println("Velocity: " + velocity);
         System.out.println("Kinetic Energy: " + kineticEnergy);
     }
+
+    @Override
+    public void normalize() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'normalize'");
+    }
+
+    @Override
+    public void sort() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sort'");
+    }
 }
