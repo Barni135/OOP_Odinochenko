@@ -439,4 +439,4 @@ public class ScaleCommand implements Command {
 }
  ```
  ![Results](../Image/image-7.png)
- ![alt text](../Image/image-8.png.png)
+ ![alt text](../Image/image-8.png)
