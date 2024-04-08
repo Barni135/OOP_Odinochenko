@@ -1678,5 +1678,5 @@ public class WorkerThread implements Runnable {
     }
 }
  ```
- ![alt text](../Image/image-9.png)
- ![alt text](../Image/image-10.png)
+ ![alt text](Image/image-9.png)
+ ![alt text](Image/image-10.png)
