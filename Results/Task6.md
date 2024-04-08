@@ -1,4 +1,8 @@
-package Src.ex2_3.test;
+ Завдання 6
+
+ Test.java
+
+ ```package Src.ex2_3.test;
 
 import Src.ex2_3.BasicCalculationResult;
 import Src.ex2_3.CalculationResult;
@@ -265,3 +269,112 @@ public class Test {
         }
     }
 }
+ ```
+
+ AverageTask.java
+
+ ```package Src.ex6;
+
+import java.util.List;
+
+public class AverageTask implements Runnable {
+    private final List<Double> numbers;
+    private double average;
+
+    public AverageTask(List<Double> numbers) {
+        this.numbers = numbers;
+    }
+
+    @Override
+    public void run() {
+        double sum = numbers.stream().mapToDouble(Double::doubleValue).sum();
+        average = sum / numbers.size();
+        System.out.println("Середнє значення: " + average);
+    }
+
+    public double getAverage() {
+        return average;
+    }
+}
+ ```
+
+ MaxTask.java
+
+ ```package Src.ex6;
+
+import java.util.List;
+
+public class MaxTask implements Runnable {
+    private final List<Double> numbers;
+    private double max;
+
+    public MaxTask(List<Double> numbers) {
+        this.numbers = numbers;
+    }
+
+    @Override
+    public void run() {
+        max = numbers.stream().max(Double::compareTo).orElse(0.0);
+        System.out.println("Максимум: " + max);
+    }
+
+    public double getMax() {
+        return max;
+    }
+}
+ ```
+
+ MinTask.java
+
+ ```package Src.ex6;
+
+import java.util.List;
+
+public class MinTask implements Runnable {
+    private final List<Double> numbers;
+    private double min;
+
+    public MinTask(List<Double> numbers) {
+        this.numbers = numbers;
+    }
+
+    @Override
+    public void run() {
+        min = numbers.stream().min(Double::compareTo).orElse(0.0);
+        System.out.println("Мінімум: " + min);
+    }
+
+    public double getMin() {
+        return min;
+    }
+}
+ ```
+
+WorkerThread.java
+
+```package Src.ex6;
+
+import java.util.concurrent.BlockingQueue;
+
+public class WorkerThread implements Runnable {
+    private final BlockingQueue<Runnable> taskQueue;
+
+    public WorkerThread(BlockingQueue<Runnable> taskQueue) {
+        this.taskQueue = taskQueue;
+    }
+
+    @Override
+    public void run() {
+        while (!Thread.currentThread().isInterrupted()) {
+            try {
+                Runnable task = taskQueue.take();
+                task.run();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+}
+ ```
+ ![alt text](../Image/image-9.png)
+ ![alt text](../Image/image-10.png)
